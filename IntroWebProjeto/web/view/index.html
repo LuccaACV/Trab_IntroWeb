@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
+</head>
+<body>
+    <!-- Navegação -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Sistema Escolar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link active" href="#administrador">Administrador</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#professor">Professor</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#aluno">Aluno</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#disciplina">Disciplina</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <!-- Seção Administrador -->
+        <section id="administrador" class="mb-5">
+            <h2 class="text-primary">Administrador</h2>
+            <form>
+                <div class="mb-3">
+                    <label for="adminNome" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="adminNome" placeholder="Digite o nome do administrador">
+                </div>
+                <div class="mb-3">
+                    <label for="adminEmail" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="adminEmail" placeholder="Digite o email">
+                </div>
+                <button type="submit" class="btn btn-success">Salvar</button>
+                <button type="reset" class="btn btn-secondary">Limpar</button>
+            </form>
+        </section>
+
+        <!-- Seção Professor -->
+        <section id="professor" class="mb-5">
+            <h2 class="text-primary">Professor</h2>
+            <form>
+                <div class="mb-3">
+                    <label for="profNome" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="profNome" placeholder="Digite o nome do professor">
+                </div>
+                <div class="mb-3">
+                    <label for="profDisciplina" class="form-label">Disciplina</label>
+                    <input type="text" class="form-control" id="profDisciplina" placeholder="Digite a disciplina">
+                </div>
+                <button type="submit" class="btn btn-success">Salvar</button>
+                <button type="reset" class="btn btn-secondary">Limpar</button>
+            </form>
+        </section>
+
+        <!-- Seção Aluno -->
+        <section id="aluno" class="mb-5">
+            <h2 class="text-primary">Aluno</h2>
+            <form>
+                <div class="mb-3">
+                    <label for="alunoNome" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="alunoNome" placeholder="Digite o nome do aluno">
+                </div>
+                <div class="mb-3">
+                    <label for="alunoMatricula" class="form-label">Matrícula</label>
+                    <input type="text" class="form-control" id="alunoMatricula" placeholder="Digite a matrícula">
+                </div>
+                <button type="submit" class="btn btn-success">Salvar</button>
+                <button type="reset" class="btn btn-secondary">Limpar</button>
+            </form>
+        </section>
+
+        <!-- Seção Disciplina -->
+        <section id="disciplina" class="mb-5">
+            <h2 class="text-primary">Disciplina</h2>
+            <form>
+                <div class="mb-3">
+                    <label for="disciplinaNome" class="form-label">Nome da Disciplina</label>
+                    <input type="text" class="form-control" id="disciplinaNome" placeholder="Digite o nome da disciplina">
+                </div>
+                <div class="mb-3">
+                    <label for="disciplinaCodigo" class="form-label">Código</label>
+                    <input type="text" class="form-control" id="disciplinaCodigo" placeholder="Digite o código">
+                </div>
+                <button type="submit" class="btn btn-success">Salvar</button>
+                <button type="reset" class="btn btn-secondary">Limpar</button>
+            </form>
+        </section>
+    </div>
+
+    <script src="bootstrap/bootstrap.bundle.min.js"></script>  
+</body>
+</html>
