@@ -75,7 +75,8 @@ O sistema deverá ser construído a partir da aplicação base fornecida (**apli
 
 ## 6. Diagrama
 
-_O diagrama não foi fornecido neste documento. Deve ser apresentado separadamente conforme a estrutura do projeto._
+![image](https://github.com/user-attachments/assets/dae7b14c-cd71-4556-a811-738b5b70de35)
+
 
 ## 7. Regras de Negócio
 
