@@ -38,6 +38,13 @@ CREATE TABLE IF NOT EXISTS `administrador` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Despejando dados para a tabela `administrador`
+--
+
+INSERT INTO `administrador` (`id`, `nome`, `cpf`, `senha`, `aprovado`, `endereco`) VALUES
+(1, 'Leo', '249.252.810-38', '111', 'S', 'Rua Nilo Peçanha 1');
+
 -- --------------------------------------------------------
 
 --
