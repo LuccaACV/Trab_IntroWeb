@@ -4,8 +4,6 @@ import entidade.Professor;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,10 +25,10 @@ public class ProfessorController extends HttpServlet {
         RequestDispatcher rd;
         switch (acao){
             case "Listar":
-                ArrayList<Professor> listaProfessors = ProfessorDAO.getAll();
-                request.setAttribute("listaProfessors", listaProfessors);
+                ArrayList<Professor> listaProfessores = ProfessorDAO.getAll();
+                request.setAttribute("listaProfessores", listaProfessores);
 
-                rd = request.getRequestDispatcher("/views/admin/Professor/listaProfessors.jsp");
+                rd = request.getRequestDispatcher("/views/admin/professor/listaProfessor.jsp");
                 rd.forward(request, response);
 
                 break;
@@ -45,7 +43,7 @@ public class ProfessorController extends HttpServlet {
                 request.setAttribute("msgError", "");
                 request.setAttribute("acao", acao);
 
-                rd = request.getRequestDispatcher("/views/admin/Professor/formProfessor.jsp");
+                rd = request.getRequestDispatcher("/views/admin/professor/formProfessor.jsp");
                 rd.forward(request, response);
                 break;
             case "Incluir":
@@ -53,7 +51,7 @@ public class ProfessorController extends HttpServlet {
                 request.setAttribute("msgError", "");
                 request.setAttribute("acao", acao);
 
-                rd = request.getRequestDispatcher("/views/admin/Professor/formProfessor.jsp");
+                rd = request.getRequestDispatcher("/views/admin/professor/formProfessor.jsp");
                 rd.forward(request, response);
         }
     }

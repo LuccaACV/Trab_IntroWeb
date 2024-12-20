@@ -10,7 +10,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="#">
-        <title>Comentário</title>
+        <title>Professor</title>
         <link href="http://localhost:8080/aplicacaoMVC/views/bootstrap/bootstrap.min.css"  rel="stylesheet">
     </head>
 
@@ -21,7 +21,7 @@
             <div class="row mt-5">
                 <div class="col-sm-4 offset-3">
                     <%
-                        Professor Professor = (Professor) request.getAttribute("Professor");
+                        Professor professor = (Professor) request.getAttribute("Professor");
                         String acao = (String) request.getAttribute("acao");
                         switch (acao) {
                             case "Incluir":
@@ -43,10 +43,10 @@
                     <% }%>
 
                     <form action="/aplicacaoMVC/admin/ProfessorController" method="POST">
-                        <input type="hidden" name="id" value="<%=Professor.getId()%>" class="form-control">
+                        <input type="hidden" name="id" value="<%=professor.getId()%>" class="form-control">
                         <div class="mb-3">
-                            <label for="descricao" class="form-label" >nome</label>
-                            <input type="text" name="descricao" <%= acao.equals("Excluir") ? "Readonly" : ""%> value="<%=Professor.getNome()%>" class="form-control">
+                            <label for="descricao" class="form-label" >Descrição</label>
+                            <input type="text" name="descricao" <%= acao.equals("Excluir") ? "Readonly" : ""%> value="<%=professor.getNome()%>" class="form-control">
                         </div>
                         <div>
                             <input type="submit" name="btEnviar" value="<%=acao%>" class="btn btn-primary">

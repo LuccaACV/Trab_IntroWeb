@@ -25,11 +25,11 @@
                 <% }%>
                 <form action="RegistrarController" method="POST">
                     <div class="mb-3">
-                        <label for="cpf" class="form-label">Nome</label>
+                        <label for="nome" class="form-label">Nome</label>
                         <input type="text" name="nome" class="form-control" placeholder="Seu nome">
                     </div>
                     <div class="mb-3">
-                        <label for="cpf" class="form-label">Endereço</label>
+                        <label for="endereco" class="form-label">Endereço</label>
                         <input type="text" name="endereco" class="form-control" placeholder="Seu endereço">
                     </div>
                     <div class="mb-3">
