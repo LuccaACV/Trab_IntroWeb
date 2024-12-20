@@ -47,6 +47,10 @@
                         <div class="mb-3">
                             <label for="descricao" class="form-label" >Descrição</label>
                             <input type="text" name="descricao" <%= acao.equals("Excluir") ? "Readonly" : ""%> value="<%=professor.getNome()%>" class="form-control">
+                            <input type="text" name="descricao" <%= acao.equals("Excluir") ? "Readonly" : ""%> value="<%=professor.getNome()%>" class="form-control">
+                            <input type="text" name="descricao" <%= acao.equals("Excluir") ? "Readonly" : ""%> value="<%=professor.getNome()%>" class="form-control">
+                            <input type="text" name="descricao" <%= acao.equals("Excluir") ? "Readonly" : ""%> value="<%=professor.getNome()%>" class="form-control">
+                            <input type="text" name="descricao" <%= acao.equals("Excluir") ? "Readonly" : ""%> value="<%=professor.getNome()%>" class="form-control">
                         </div>
                         <div>
                             <input type="submit" name="btEnviar" value="<%=acao%>" class="btn btn-primary">
