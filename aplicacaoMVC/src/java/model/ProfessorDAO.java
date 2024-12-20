@@ -39,6 +39,11 @@ public class ProfessorDAO implements Dao<Professor> {
     public void insert(Professor t) {
         Conexao conexao = new Conexao();
         try {
+            System.out.println("Query: UPDATE Professores SET nome = " + t.getNome() + 
+                   ", email = " + t.getEmail() + 
+                   ", cpf = " + t.getCpf() + 
+                   ", senha = " + t.getSenha() + 
+                   " WHERE ID = " + t.getId());
             PreparedStatement sql = conexao.getConexao().prepareStatement("INSERT INTO Professores (nome, email, cpf, senha) VALUES (?,?,?,?)");
             sql.setString(1, t.getNome());
             sql.setString(2, t.getEmail());
@@ -57,6 +62,12 @@ public class ProfessorDAO implements Dao<Professor> {
     public void update(Professor t) {
         Conexao conexao = new Conexao();
         try {
+            System.out.println("Query: UPDATE Professores SET nome = " + t.getNome() + 
+                   ", email = " + t.getEmail() + 
+                   ", cpf = " + t.getCpf() + 
+                   ", senha = " + t.getSenha() + 
+                   " WHERE ID = " + t.getId());
+
             PreparedStatement sql = conexao.getConexao().prepareStatement("UPDATE Professores SET nome = ?, email = ?, cpf = ?, senha = ? WHERE ID = ?");
             sql.setString(1, t.getNome());
             sql.setString(2, t.getEmail());

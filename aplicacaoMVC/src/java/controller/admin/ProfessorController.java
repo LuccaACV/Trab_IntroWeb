@@ -60,6 +60,34 @@ public class ProfessorController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        
+        String acao = request.getParameter("btEnviar");
+        Professor professor = new Professor();
+        
+        // Pega o ID e os dados do formulário
+        professor.setId(Integer.parseInt(request.getParameter("id")));
+        professor.setNome(request.getParameter("nome"));
+        professor.setEmail(request.getParameter("email"));
+        professor.setCpf(request.getParameter("cpf"));
+        professor.setSenha(request.getParameter("senha"));
+        
+        ProfessorDAO professorDAO = new ProfessorDAO();
+        
+        switch (acao) {
+            case "Incluir":
+                professorDAO.insert(professor);
+                response.sendRedirect("/aplicacaoMVC/admin/ProfessorController?acao=Listar");
+                break;
+            case "Alterar":
+                professorDAO.update(professor);
+                response.sendRedirect("/aplicacaoMVC/admin/ProfessorController?acao=Listar");
+                break;
+            case "Excluir":
+                professorDAO.delete(professor.getId());
+                response.sendRedirect("/aplicacaoMVC/admin/ProfessorController?acao=Listar");
+                break;
+        }
     }
 
  

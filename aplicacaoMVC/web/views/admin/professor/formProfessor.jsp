@@ -11,7 +11,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="#">
         <title>Professor</title>
-        <link href="http://localhost:8080/aplicacaoMVC/views/bootstrap/bootstrap.min.css"  rel="stylesheet">
+        <link href="http://localhost:8080/aplicacaoMVC/views/bootstrap/bootstrap.min.css" rel="stylesheet">
     </head>
 
     <body>
@@ -23,6 +23,8 @@
                     <%
                         Professor professor = (Professor) request.getAttribute("Professor");
                         String acao = (String) request.getAttribute("acao");
+                        
+                        // Exibir o título conforme a ação
                         switch (acao) {
                             case "Incluir":
                                 out.println("<h1>Incluir Professor</h1>");
@@ -35,25 +37,82 @@
                                 break;
                         }
 
+                        // Exibir a mensagem de erro, se houver
                         String msgError = (String) request.getAttribute("msgError");
-                        if ((msgError != null) && (!msgError.isEmpty())) {%>
-                    <div class="alert alert-danger" role="alert">
-                        <%= msgError%>
-                    </div>
-                    <% }%>
+                        if ((msgError != null) && (!msgError.isEmpty())) { %>
+                            <div class="alert alert-danger" role="alert">
+                                <%= msgError %>
+                            </div>
+                    <% } %>
 
+                    <!-- Formulário para cada ação -->
                     <form action="/aplicacaoMVC/admin/ProfessorController" method="POST">
-                        <input type="hidden" name="id" value="<%=professor.getId()%>" class="form-control">
-                        <div class="mb-3">
-                            <label for="descricao" class="form-label" >Descrição</label>
-                            <input type="text" name="descricao" <%= acao.equals("Excluir") ? "Readonly" : ""%> value="<%=professor.getNome()%>" class="form-control">
-                            <input type="text" name="descricao" <%= acao.equals("Excluir") ? "Readonly" : ""%> value="<%=professor.getNome()%>" class="form-control">
-                            <input type="text" name="descricao" <%= acao.equals("Excluir") ? "Readonly" : ""%> value="<%=professor.getNome()%>" class="form-control">
-                            <input type="text" name="descricao" <%= acao.equals("Excluir") ? "Readonly" : ""%> value="<%=professor.getNome()%>" class="form-control">
-                            <input type="text" name="descricao" <%= acao.equals("Excluir") ? "Readonly" : ""%> value="<%=professor.getNome()%>" class="form-control">
-                        </div>
+                        <input type="hidden" name="id" value="<%= professor != null ? professor.getId() : "" %>" class="form-control">
+
+                        <!-- Formulário para Incluir -->
+                        <%
+                            if ("Incluir".equals(acao)) {
+                        %>
+                            <div class="mb-3">
+                                <label for="nome" class="form-label">Nome</label>
+                                <input type="text" name="nome" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">E-mail</label>
+                                <input type="text" name="descricao" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="cpf" class="form-label">CPF</label>
+                                <input type="text" name="descricao" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="senha" class="form-label">Senha</label>
+                                <input type="text" name="descricao" class="form-control" required>
+                            </div>
+                        <% 
+                            // Formulário para Alterar
+                            } else if ("Alterar".equals(acao)) {
+                        %>
+                            <div class="mb-3">
+                                <label for="nome" class="form-label">Nome</label>
+                                <input type="text" name="nome" value="<%= professor.getNome() %>" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">E-mail</label>
+                                <input type="text" name="email" value="<%= professor.getEmail() %>" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="cpf" class="form-label">CPF</label>
+                                <input type="text" name="cpf" value="<%= professor.getCpf() %>" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="senha" class="form-label">Senha</label>
+                                <input type="text" name="senha" value="<%= professor.getSenha() %>" class="form-control" required>
+                            </div>
+                        <% 
+                            // Formulário para Excluir
+                            } else if ("Excluir".equals(acao)) {
+                        %>
+                            <div class="mb-3">
+                                <label for="nome" class="form-label">Nome</label>
+                                <input type="text" name="nome" value="<%= professor.getNome() %>" class="form-control" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">E-mail</label>
+                                <input type="text" name="email" value="<%= professor.getEmail() %>" class="form-control" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="cpf" class="form-label">CPF</label>
+                                <input type="text" name="cpf" value="<%= professor.getCpf() %>" class="form-control" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="senha" class="form-label">Senha</label>
+                                <input type="text" name="senha" value="<%= professor.getSenha() %>" class="form-control" readonly>
+                            </div>
+                        <% } %>
+
                         <div>
-                            <input type="submit" name="btEnviar" value="<%=acao%>" class="btn btn-primary">
+                            <input type="submit" name="btEnviar" value="<%= acao %>" class="btn btn-primary">
                             <a href="/aplicacaoMVC/admin/ProfessorController?acao=Listar" class="btn btn-danger">Retornar</a>
                         </div>
                     </form>
