@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package controller.admin;
 
 import entidade.Aluno;
@@ -22,14 +18,13 @@ public class AlunoController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String acao = (String) request.getParameter("acao");
+        String acao = request.getParameter("acao");
         Aluno aluno = new Aluno();
         AlunoDAO alunoDAO = new AlunoDAO();
         RequestDispatcher rd;
-        
+
         switch (acao) {
             case "Listar":
-                // Listar todos os alunos
                 ArrayList<Aluno> listaAlunos = alunoDAO.getAll();
                 request.setAttribute("listaAlunos", listaAlunos);
 
@@ -39,7 +34,6 @@ public class AlunoController extends HttpServlet {
 
             case "Alterar":
             case "Excluir":
-                // get parâmetro ação indicando qual aluno será alterado ou excluído
                 int id = Integer.parseInt(request.getParameter("id"));
                 aluno = alunoDAO.get(id);
 
@@ -52,17 +46,12 @@ public class AlunoController extends HttpServlet {
                 break;
 
             case "Incluir":
-                // Incluir um novo aluno
                 request.setAttribute("aluno", aluno);
                 request.setAttribute("msgError", "");
                 request.setAttribute("acao", acao);
 
                 rd = request.getRequestDispatcher("/views/admin/aluno/formAluno.jsp");
                 rd.forward(request, response);
-                break;
-
-            default:
-                response.sendRedirect("/admin/alunos"); // Redireciona para a lista de alunos
                 break;
         }
     }
@@ -71,43 +60,46 @@ public class AlunoController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String acao = (String) request.getParameter("acao");
+        String acao = request.getParameter("btEnviar");
+        Aluno aluno = new Aluno();
+
+        // Pega o ID e os dados do formulário
+        String idParam = request.getParameter("id");
+        if (idParam != null && !idParam.isEmpty()) {
+            aluno.setId(Integer.parseInt(idParam));
+        }
+        aluno.setNome(request.getParameter("nome"));
+        aluno.setEmail(request.getParameter("email"));
+        aluno.setCelular(request.getParameter("celular"));
+        aluno.setCpf(request.getParameter("cpf"));
+        aluno.setSenha(request.getParameter("senha"));
+        aluno.setEndereco(request.getParameter("endereco"));
+        aluno.setCidade(request.getParameter("cidade"));
+        aluno.setBairro(request.getParameter("bairro"));
+        aluno.setCep(request.getParameter("cep"));
+
         AlunoDAO alunoDAO = new AlunoDAO();
-        Aluno aluno;
-        RequestDispatcher rd;
 
-        if ("Salvar".equals(acao)) {
-            // Obtendo os dados do formulário
-            String nome = request.getParameter("nome");
-            String email = request.getParameter("email");
-            String celular = request.getParameter("celular");
-            String cpf = request.getParameter("cpf");
-            String senha = request.getParameter("senha");
-            String endereco = request.getParameter("endereco");
-            String cidade = request.getParameter("cidade");
-            String bairro = request.getParameter("bairro");
-            String cep = request.getParameter("cep");
+        switch (acao) {
+            case "Incluir":
+                alunoDAO.insert(aluno);
+                response.sendRedirect("/admin/AlunoController?acao=Listar");
+                break;
 
-            // Criando o objeto Aluno
-            aluno = new Aluno(0, nome, email, celular, cpf, senha, endereco, cidade, bairro, cep);
+            case "Alterar":
+                alunoDAO.update(aluno);
+                response.sendRedirect("/admin/AlunoController?acao=Listar");
+                break;
 
-            // Salvar ou atualizar o aluno
-            if (request.getParameter("id") != null && !request.getParameter("id").isEmpty()) {
-                int id = Integer.parseInt(request.getParameter("id"));
-                aluno.setId(id);
-                alunoDAO.update(aluno); // Atualiza o aluno
-            } else {
-                alunoDAO.insert(aluno); // Insere um novo aluno
-            }
-
-            // Redirecionar para a lista de alunos
-            response.sendRedirect("/admin/alunos");
+            case "Excluir":
+                alunoDAO.delete(aluno.getId());
+                response.sendRedirect("/admin/AlunoController?acao=Listar");
+                break;
         }
     }
 
     @Override
     public String getServletInfo() {
-        return "Controle de alunos para administração.";
+        return "Controller para gerenciamento de alunos";
     }
 }
-
