@@ -83,17 +83,17 @@ public class AlunoController extends HttpServlet {
         switch (acao) {
             case "Incluir":
                 alunoDAO.insert(aluno);
-                response.sendRedirect("/admin/AlunoController?acao=Listar");
+                response.sendRedirect("/aplicacaoMVC/admin/AlunoController?acao=Listar");
                 break;
 
             case "Alterar":
                 alunoDAO.update(aluno);
-                response.sendRedirect("/admin/AlunoController?acao=Listar");
+                response.sendRedirect("/aplicacaoMVC/admin/AlunoController?acao=Listar");
                 break;
 
             case "Excluir":
                 alunoDAO.delete(aluno.getId());
-                response.sendRedirect("/admin/AlunoController?acao=Listar");
+                response.sendRedirect("/aplicacaoMVC/admin/AlunoController?acao=Listar");
                 break;
         }
     }
