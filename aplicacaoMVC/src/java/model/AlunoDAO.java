@@ -34,7 +34,7 @@ public class AlunoDAO implements Dao<Aluno> {
             return aluno;
 
         } catch (SQLException e) {
-            throw new RuntimeException("Query de select (get aluno) incorreta");
+            throw new RuntimeException("Query de select (get aluno) incorreta", e);
         } finally {
             conexao.closeConexao();
         }
@@ -44,21 +44,25 @@ public class AlunoDAO implements Dao<Aluno> {
     public void insert(Aluno t) {
         Conexao conexao = new Conexao();
         try {
-            PreparedStatement sql = conexao.getConexao().prepareStatement(
-                "INSERT INTO Alunos (nome, email, celular, cpf, senha, endereco, cidade, bairro, cep) VALUES (?,?,?,?,?,?,?,?,?)");
+            String sqlQuery = "INSERT INTO Alunos (nome, email, celular, cpf, senha, endereco, cidade, bairro, cep) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement sql = conexao.getConexao().prepareStatement(sqlQuery);
+
             sql.setString(1, t.getNome());
             sql.setString(2, t.getEmail());
             sql.setString(3, t.getCelular());
             sql.setString(4, t.getCpf());
-            sql.setString(5, t.getSenha());  // Incluindo senha
+            sql.setString(5, t.getSenha());
             sql.setString(6, t.getEndereco());
             sql.setString(7, t.getCidade());
             sql.setString(8, t.getBairro());
             sql.setString(9, t.getCep());
-            sql.executeUpdate();
 
+            int rowsAffected = sql.executeUpdate();
+            if (rowsAffected == 0) {
+                throw new RuntimeException("Nenhuma linha foi inserida.");
+            }
         } catch (SQLException e) {
-            throw new RuntimeException("Query de insert (aluno) incorreta");
+            throw new RuntimeException("Query de insert (aluno) incorreta", e);
         } finally {
             conexao.closeConexao();
         }
@@ -69,21 +73,22 @@ public class AlunoDAO implements Dao<Aluno> {
         Conexao conexao = new Conexao();
         try {
             PreparedStatement sql = conexao.getConexao().prepareStatement(
-                "UPDATE Alunos SET nome = ?, email = ?, celular = ?, cpf = ?, senha = ?, endereco = ?, cidade = ?, bairro = ?, cep = ? WHERE ID = ?");
+                "UPDATE Alunos SET nome = ?, email = ?, celular = ?, cpf = ?, senha = ?, endereco = ?, cidade = ?, bairro = ?, cep = ? WHERE ID = ?"
+            );
             sql.setString(1, t.getNome());
             sql.setString(2, t.getEmail());
             sql.setString(3, t.getCelular());
             sql.setString(4, t.getCpf());
-            sql.setString(5, t.getSenha());  // Incluindo senha
+            sql.setString(5, t.getSenha());
             sql.setString(6, t.getEndereco());
             sql.setString(7, t.getCidade());
             sql.setString(8, t.getBairro());
             sql.setString(9, t.getCep());
             sql.setInt(10, t.getId());
-            sql.executeUpdate();
 
+            sql.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException("Query de update (alterar aluno) incorreta");
+            throw new RuntimeException("Query de update (alterar aluno) incorreta", e);
         } finally {
             conexao.closeConexao();
         }
@@ -97,6 +102,7 @@ public class AlunoDAO implements Dao<Aluno> {
             String selectSQL = "SELECT id, nome, email, celular, cpf, senha, endereco, cidade, bairro, cep FROM Alunos";
             PreparedStatement preparedStatement = conexao.getConexao().prepareStatement(selectSQL);
             ResultSet resultado = preparedStatement.executeQuery();
+
             if (resultado != null) {
                 while (resultado.next()) {
                     Aluno aluno = new Aluno(
@@ -115,7 +121,7 @@ public class AlunoDAO implements Dao<Aluno> {
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Query de select (getAll alunos) incorreta" + e.getMessage());
+            throw new RuntimeException("Query de select (getAll) incorreta", e);
         } finally {
             conexao.closeConexao();
         }
@@ -129,9 +135,8 @@ public class AlunoDAO implements Dao<Aluno> {
             PreparedStatement sql = conexao.getConexao().prepareStatement("DELETE FROM Alunos WHERE ID = ?");
             sql.setInt(1, id);
             sql.executeUpdate();
-
         } catch (SQLException e) {
-            throw new RuntimeException("Query de delete (excluir aluno) incorreta");
+            throw new RuntimeException("Query de delete (excluir aluno) incorreta", e);
         } finally {
             conexao.closeConexao();
         }
