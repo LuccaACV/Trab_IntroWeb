@@ -39,13 +39,22 @@ public class ProfessorDAO implements Dao<Professor> {
     public void insert(Professor t) {
         Conexao conexao = new Conexao();
         try {
-            PreparedStatement sql = conexao.getConexao().prepareStatement("INSERT INTO Professores (nome, email, cpf, senha) VALUES (?,?,?,?)");
+            
+            String sqlQuery = "INSERT INTO professores (nome, email, cpf, senha) VALUES (?, ?, ?, ?)";
+            PreparedStatement sql = conexao.getConexao().prepareStatement(sqlQuery);
+
             sql.setString(1, t.getNome());
             sql.setString(2, t.getEmail());
             sql.setString(3, t.getCpf());
             sql.setString(4, t.getSenha());
-            sql.executeUpdate();
 
+            // Exibindo o SQL antes de executar para depuração
+            System.out.println("Executando SQL: " + sqlQuery);
+
+            int rowsAffected = sql.executeUpdate();
+            if (rowsAffected == 0) {
+                throw new RuntimeException("Nenhuma linha foi inserida.");
+            }
         } catch (SQLException e) {
             throw new RuntimeException("Query de insert (professor) incorreta");
         } finally {

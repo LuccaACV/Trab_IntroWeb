@@ -59,15 +59,15 @@
                             </div>
                             <div class="mb-3">
                                 <label for="email" class="form-label">E-mail</label>
-                                <input type="text" name="descricao" class="form-control" required>
+                                <input type="text" name="email" class="form-control" required>
                             </div>
                             <div class="mb-3">
                                 <label for="cpf" class="form-label">CPF</label>
-                                <input type="text" name="descricao" class="form-control" required>
+                                <input type="text" name="cpf" class="form-control" required>
                             </div>
                             <div class="mb-3">
                                 <label for="senha" class="form-label">Senha</label>
-                                <input type="text" name="descricao" class="form-control" required>
+                                <input type="text" name="senha" class="form-control" required>
                             </div>
                         <% 
                             // Formulário para Alterar
