@@ -76,7 +76,7 @@ public class AlunoDAO implements Dao<Aluno> {
     public void update(Aluno t) {
         Conexao conexao = new Conexao();
         try {
-            PreparedStatement sql = conexao.getConexao().prepareStatement("UPDATE Alunos SET nome = ?, email = ?, celular = ?, cpf = ?, senha = ?, endereco = ?, cidade = ?, bairro = ?, cep = ?, WHERE ID = ?");
+            PreparedStatement sql = conexao.getConexao().prepareStatement("UPDATE Alunos SET nome = ?, email = ?, celular = ?, cpf = ?, senha = ?, endereco = ?, cidade = ?, bairro = ?, cep = ? WHERE ID = ?");
             sql.setString(1, t.getNome());
             sql.setString(2, t.getEmail());
             sql.setString(3, t.getCelular());
