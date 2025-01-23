@@ -21,7 +21,7 @@
             <div class="row mt-5">
                 <div class="col-sm-4 offset-3">
                     <%
-                        Administrador administrador = (Administrador) request.getAttribute("Administrador");
+                        Administrador administrador = (Administrador) request.getAttribute("administrador");
                         String acao = (String) request.getAttribute("acao");
                         
                         // Exibir o título conforme a ação
@@ -71,7 +71,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="endereço" class="form-label">Endereço</label>
-                                <input type="text" name="endereço" class="form-control" required>
+                                <input type="text" name="endereco" class="form-control" required>
                             </div>
                         <% 
                             // Formulário para Alterar
@@ -95,7 +95,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="endereço" class="form-label">Endereço</label>
-                                <input type="text" name="endereço" class="form-control" value="<%= administrador.getEndereco() %>"required>
+                                <input type="text" name="endereco" class="form-control" value="<%= administrador.getEndereco() %>"required>
                             </div>
                         <% 
                             // Formulário para Excluir
@@ -119,7 +119,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="endereço" class="form-label">Endereço</label>
-                                <input type="text" name="endereço" value="<%= administrador.getEndereco() %>" class="form-control" readonly>
+                                <input type="text" name="endereco" value="<%= administrador.getEndereco() %>" class="form-control" readonly>
                             </div>
                         <% } %>
 
