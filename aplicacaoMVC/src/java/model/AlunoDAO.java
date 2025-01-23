@@ -100,7 +100,7 @@ public class AlunoDAO implements Dao<Aluno> {
         ArrayList<Aluno> alunos = new ArrayList<>();
         Conexao conexao = new Conexao();
         try {
-            String selectSQL = "SELECT id, nome, email, celular, cpf, senha, endereco, cidade, bairro, cep, FROM Alunos";
+            String selectSQL = "SELECT id, nome, email, celular, cpf, senha, endereco, cidade, bairro, cep FROM Alunos";
             PreparedStatement preparedStatement = conexao.getConexao().prepareStatement(selectSQL);
             ResultSet resultado = preparedStatement.executeQuery();
             if (resultado != null) {
