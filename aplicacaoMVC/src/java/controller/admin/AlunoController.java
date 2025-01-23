@@ -25,8 +25,8 @@ public class AlunoController extends HttpServlet {
         RequestDispatcher rd;
         switch (acao){
             case "Listar":
-                ArrayList<Aluno> listaAluno = AlunoDAO.getAll();
-                request.setAttribute("listaAluno", listaAluno);
+                ArrayList<Aluno> listaAlunos = AlunoDAO.getAll();
+                request.setAttribute("listaAlunos", listaAlunos);
 
                 rd = request.getRequestDispatcher("/views/admin/aluno/listaAluno.jsp");
                 rd.forward(request, response);
@@ -35,7 +35,7 @@ public class AlunoController extends HttpServlet {
             case "Alterar":
             case "Excluir":
 
-                // get parametro ação indicando sobre qual Professor será a ação
+                // get parametro ação indicando sobre qual Aluno será a ação
                 int id = Integer.parseInt(request.getParameter("id"));
                 Aluno = AlunoDAO.get(id);
 
