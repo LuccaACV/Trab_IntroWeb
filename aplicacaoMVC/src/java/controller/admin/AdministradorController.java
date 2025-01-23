@@ -69,6 +69,7 @@ public class AdministradorController extends HttpServlet {
         administrador.setCpf(request.getParameter("cpf"));
         administrador.setEndereco(request.getParameter("endereco"));
         administrador.setSenha(request.getParameter("senha"));
+        administrador.setAprovado(request.getParameter("aprovado"));
         
         AdministradorDAO administradorDAO = new AdministradorDAO();  // Alterado para AdministradorDAO
         
