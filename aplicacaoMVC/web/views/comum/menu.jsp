@@ -15,7 +15,7 @@
                         if (AdministradorLogado != null) { %>
                             <a class="nav-link" href="/aplicacaoMVC/admin/dashboard">Dashboard</a>
                             <a class="nav-link" href="/aplicacaoMVC/admin/AdministradorController?acao=Listar">Administrador</a>
-                            <a class="nav-link" href="/aplicacaoMVC/admin/dashboard">Aluno</a>
+                            <a class="nav-link" href="/aplicacaoMVC/admin/AlunoController?acao=Listar">Aluno</a>
                             <a class="nav-link" href="/aplicacaoMVC/admin/ProfessorController?acao=Listar">Professor</a>
                             <a class="nav-link" href="/aplicacaoMVC/admin/DisciplinaController?acao=Listar">Disciplina</a>
                             <a class="nav-link" href="/aplicacaoMVC/admin/dashboard">Turma</a>
