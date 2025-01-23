@@ -14,6 +14,11 @@ public class Aluno {
     
     public Aluno() {}
     
+    public Aluno(String cpf, String senha) {
+        this.cpf = cpf;
+        this.senha = senha;
+    }
+    
     public Aluno(int id, String nome, String email, String celular, String cpf, String senha, String endereco, String cidade, String bairro, String cep) {
         this.id = id;
         this.nome = nome;

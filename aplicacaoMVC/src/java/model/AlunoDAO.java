@@ -12,23 +12,23 @@ public class AlunoDAO implements Dao<Aluno> {
     public Aluno get(int id) {
         Conexao conexao = new Conexao();
         try {
-            PreparedStatement sql = conexao.getConexao().prepareStatement("SELECT * FROM Alunos WHERE ID = ?");
+            PreparedStatement sql = conexao.getConexao().prepareStatement("SELECT * FROM Alunos WHERE id = ?");
             sql.setInt(1, id);
             ResultSet resultado = sql.executeQuery();
             Aluno aluno = new Aluno();
 
             if (resultado != null) {
                 while (resultado.next()) {
-                    aluno.setId(Integer.parseInt(resultado.getString("ID")));
-                    aluno.setNome(resultado.getString("NOME"));
-                    aluno.setEmail(resultado.getString("EMAIL"));
-                    aluno.setCelular(resultado.getString("CELULAR"));
-                    aluno.setCpf(resultado.getString("CPF"));
-                    aluno.setSenha(resultado.getString("SENHA"));
-                    aluno.setEndereco(resultado.getString("ENDERECO"));
-                    aluno.setCidade(resultado.getString("CIDADE"));
-                    aluno.setBairro(resultado.getString("BAIRRO"));
-                    aluno.setCep(resultado.getString("CEP"));
+                    aluno.setId(Integer.parseInt(resultado.getString("id")));
+                    aluno.setNome(resultado.getString("nome"));
+                    aluno.setEmail(resultado.getString("email"));
+                    aluno.setCelular(resultado.getString("celular"));
+                    aluno.setCpf(resultado.getString("cpf"));
+                    aluno.setSenha(resultado.getString("senha"));
+                    aluno.setEndereco(resultado.getString("endereco"));
+                    aluno.setCidade(resultado.getString("cidade"));
+                    aluno.setBairro(resultado.getString("bairro"));
+                    aluno.setCep(resultado.getString("cep"));
                 }
             }
             return aluno;
@@ -133,12 +133,40 @@ public class AlunoDAO implements Dao<Aluno> {
     public void delete(int id) {
         Conexao conexao = new Conexao();
         try {
-            PreparedStatement sql = conexao.getConexao().prepareStatement("DELETE FROM Alunos WHERE ID = ?");
+            PreparedStatement sql = conexao.getConexao().prepareStatement("DELETE FROM Alunos WHERE id = ?");
             sql.setInt(1, id);
             sql.executeUpdate();
 
         } catch (SQLException e) {
             throw new RuntimeException("Query de delete (excluir aluno) incorreta");
+        } finally {
+            conexao.closeConexao();
+        }
+    }
+    
+    public Aluno Logar(Aluno aluno) throws Exception {
+        Conexao conexao = new Conexao();
+        try {
+            PreparedStatement sql = conexao.getConexao().prepareStatement("SELECT * FROM alunos WHERE cpf = ? AND senha = ? LIMIT 1");
+            sql.setString(1, aluno.getCpf());
+            sql.setString(2, aluno.getSenha());
+            ResultSet resultado = sql.executeQuery();
+            if (resultado != null && resultado.next()) {
+                aluno.setId(resultado.getInt("id"));
+                aluno.setNome(resultado.getString("nome"));
+                aluno.setEmail(resultado.getString("email"));
+                aluno.setCelular(resultado.getString("celular"));
+                aluno.setCpf(resultado.getString("cpf"));
+                aluno.setSenha(resultado.getString("senha"));
+                aluno.setEndereco(resultado.getString("endereco"));
+                aluno.setCidade(resultado.getString("cidade"));
+                aluno.setBairro(resultado.getString("bairro"));
+                aluno.setCep(resultado.getString("cep"));
+            }
+            return aluno;
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao realizar login", e);
         } finally {
             conexao.closeConexao();
         }

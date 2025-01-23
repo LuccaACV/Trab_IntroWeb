@@ -20,7 +20,7 @@ public class filtroRestrito implements Filter {
             FilterChain chain)
             throws IOException, ServletException {
 
-        Administrador administrador = (Administrador)((HttpServletRequest) request).getSession().getAttribute("administrador");
+        Administrador administrador = (Administrador)((HttpServletRequest) request).getSession().getAttribute("usuario");
 
         if ((administrador != null) && (!((String) administrador.getNome()).isEmpty())) {
             chain.doFilter(request, response);

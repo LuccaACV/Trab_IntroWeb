@@ -67,7 +67,7 @@ public class DisciplinaDAO implements Dao<Disciplina> {
     public void update(Disciplina t) {
         Conexao conexao = new Conexao();
         try {
-            PreparedStatement sql = conexao.getConexao().prepareStatement("UPDATE Disciplina SET nome = ?, requisito = ?, ementa = ?, carga_horaria = ? WHERE ID = ?");
+            PreparedStatement sql = conexao.getConexao().prepareStatement("UPDATE Disciplina SET nome = ?, requisito = ?, ementa = ?, carga_horaria = ? WHERE id = ?");
             sql.setString(1, t.getNome());
             sql.setString(2, t.getRequisito());
             sql.setString(3, t.getEmenta());
