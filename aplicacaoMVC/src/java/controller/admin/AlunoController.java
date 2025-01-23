@@ -21,7 +21,7 @@ public class AlunoController extends HttpServlet {
         
         String acao = (String) request.getParameter("acao");
         Aluno Aluno = new Aluno();
-        AlunoDAO ProfessorDAO = new AlunoDAO();
+        AlunoDAO AlunoDAO = new AlunoDAO();
         RequestDispatcher rd;
         switch (acao){
             case "Listar":
