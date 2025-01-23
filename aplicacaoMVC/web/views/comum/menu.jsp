@@ -18,7 +18,7 @@
                             <a class="nav-link" href="/aplicacaoMVC/admin/AlunoController?acao=Listar">Aluno</a>
                             <a class="nav-link" href="/aplicacaoMVC/admin/ProfessorController?acao=Listar">Professor</a>
                             <a class="nav-link" href="/aplicacaoMVC/admin/DisciplinaController?acao=Listar">Disciplina</a>
-                            <a class="nav-link" href="/aplicacaoMVC/admin/dashboard">Turma</a>
+                            <a class="nav-link" href="/aplicacaoMVC/admin/TurmaController?acao=Listar">Turma</a>
                             <a class="nav-link" href="/aplicacaoMVC/admin/logOut">Logout</a>
                 <%  } else { %>
                             <a class="nav-link" href="/aplicacaoMVC/AutenticaController?acao=Login">Login</a>
