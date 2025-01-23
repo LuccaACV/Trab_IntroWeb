@@ -86,10 +86,11 @@ public class AlunoDAO implements Dao<Aluno> {
             sql.setString(7, t.getCidade());
             sql.setString(8, t.getBairro());
             sql.setString(9, t.getCep());
+            sql.setInt(10, t.getId());
             sql.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException("Query de update (alterar professor) incorreta");
+            throw new RuntimeException("Query de update (alterar aluno) incorreta");
         } finally {
             conexao.closeConexao();
         }
