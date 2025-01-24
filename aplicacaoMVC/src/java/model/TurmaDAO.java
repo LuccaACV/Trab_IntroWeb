@@ -127,4 +127,54 @@ public class TurmaDAO {
             conexao.closeConexao();
         }
     }
+    
+    public ArrayList<String> getRelatorioTurmas() {
+    ArrayList<String> relatorio = new ArrayList<>();
+    Conexao conexao = new Conexao();
+
+    try {
+        String sqlQuery = 
+            "SELECT " +
+            "    d.nome AS disciplina, " +
+            "    t.codigo_turma AS turma, " +
+            "    p.nome AS professor, " +
+            "    a.nome AS aluno, " +
+            "    t.nota AS nota " +
+            "FROM " +
+            "    turmas t " +
+            "INNER JOIN " +
+            "    disciplina d ON t.disciplina_id = d.id " +
+            "INNER JOIN " +
+            "    professores p ON t.professor_id = p.id " +
+            "INNER JOIN " +
+            "    alunos a ON t.aluno_id = a.id " +
+            "ORDER BY " +
+            "    d.nome, t.codigo_turma, a.nome";
+
+        PreparedStatement preparedStatement = conexao.getConexao().prepareStatement(sqlQuery);
+        ResultSet resultado = preparedStatement.executeQuery();
+
+        while (resultado.next()) {
+            String disciplina = resultado.getString("disciplina");
+            String turma = resultado.getString("turma");
+            String professor = resultado.getString("professor");
+            String aluno = resultado.getString("aluno");
+            float nota = resultado.getFloat("nota");
+
+            relatorio.add(
+                "Disciplina: " + disciplina + 
+                ", Turma: " + turma + 
+                ", Professor: " + professor + 
+                ", Aluno: " + aluno + 
+                ", Nota: " + nota
+            );
+        }
+    } catch (SQLException e) {
+        throw new RuntimeException("Erro ao gerar relatório de turmas: " + e.getMessage());
+    } finally {
+        conexao.closeConexao();
+    }
+
+    return relatorio;
+}
 }
