@@ -64,6 +64,7 @@
                         }
                     } else {
                 %>
+                <a class="btn btn-primary" href="/aplicacaoMVC/admin/dashboard">Gerar relatório</a>
                         <div class="alert alert-warning mt-3" role="alert">
                             Nenhuma disciplina ou aluno foi encontrado para exibição.
                         </div>
