@@ -2,6 +2,7 @@ package controller;
 
 import entidade.Administrador;
 import entidade.Aluno;
+import entidade.Professor;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.AdministradorDAO;
 import model.AlunoDAO;
+import model.ProfessorDAO;
 
 @WebServlet(name = "AutenticaController", urlPatterns = {"/AutenticaController"})
 public class AutenticaController extends HttpServlet {
@@ -74,7 +76,7 @@ public class AutenticaController extends HttpServlet {
             alunoObtido = alunoDAO.Logar(aluno);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
-            throw new RuntimeException("Falha na query do ALuno para Logar");
+            throw new RuntimeException("Falha na query do Aluno para Logar");
         }
 
         if (alunoObtido != null && alunoObtido.getId() != 0) {
@@ -83,6 +85,28 @@ public class AutenticaController extends HttpServlet {
             session.setAttribute("tipoUsuario", "aluno");
 
             rd = request.getRequestDispatcher("/aluno/dashboard");
+            rd.forward(request, response);
+            return;
+        }
+        
+        // Tentativa de login para Professor
+        Professor professorObtido;
+        Professor professor = new Professor(cpf_user, senha_user);
+        ProfessorDAO professorDAO = new ProfessorDAO();
+
+        try {
+            professorObtido = professorDAO.Logar(professor);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            throw new RuntimeException("Falha na query do Professor para Logar");
+        }
+
+        if (professorObtido != null && professorObtido.getId() != 0) {
+            HttpSession session = request.getSession();
+            session.setAttribute("usuario", professorObtido);
+            session.setAttribute("tipoUsuario", "professor");
+
+            rd = request.getRequestDispatcher("/professor/dashboard");
             rd.forward(request, response);
             return;
         }

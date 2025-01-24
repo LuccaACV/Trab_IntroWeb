@@ -123,4 +123,27 @@ public class ProfessorDAO implements Dao<Professor> {
             conexao.closeConexao();
         }
     }
+    
+    public Professor Logar(Professor professor) throws Exception {
+        Conexao conexao = new Conexao();
+        try {
+            PreparedStatement sql = conexao.getConexao().prepareStatement("SELECT * FROM professores WHERE cpf = ? AND senha = ? LIMIT 1");
+            sql.setString(1, professor.getCpf());
+            sql.setString(2, professor.getSenha());
+            ResultSet resultado = sql.executeQuery();
+            if (resultado != null && resultado.next()) {
+                professor.setId(resultado.getInt("id"));
+                professor.setNome(resultado.getString("nome"));
+                professor.setEmail(resultado.getString("email"));
+                professor.setCpf(resultado.getString("cpf"));
+                professor.setSenha(resultado.getString("senha"));
+            }
+            return professor;
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao realizar login", e);
+        } finally {
+            conexao.closeConexao();
+        }
+    }
 }

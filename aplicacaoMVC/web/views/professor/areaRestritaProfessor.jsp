@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" import="entidade.Administrador" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" import="entidade.Professor" %>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -12,14 +12,14 @@
     </head>
     <body>
         <div class="container">
-            <jsp:include page="../../comum/menu.jsp" />
+            <jsp:include page="../comum/menu.jsp" />
             <div class="mt-5">
 
                 <h1>Área Restrita</h1>
                 <%
-                    Administrador administradorLogado = (Administrador) session.getAttribute("usuario");
-                    out.println("<h3>Administrador logado com sucesso</h3>");
-                    out.println("<h2>Nome: " + administradorLogado.getNome() + "</h2>");
+                    Professor professorLogado = (Professor) session.getAttribute("usuario");
+                    out.println("<h3>Professor logado com sucesso</h3>");
+                    out.println("<h2>Nome: " + professorLogado.getNome() + "</h2>");
                 %>
             </div>
         </div>

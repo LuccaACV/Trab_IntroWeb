@@ -12,12 +12,11 @@
                     // Testar se está logado
                     HttpSession sessao = request.getSession(false); // false não cria uma nova sessão
                     if (sessao != null) { // Se a sessão existir
-                    
                         // Recupera o tipo de usuário e o objeto usuário da sessão
-                        String tipoUsuario = (String) session.getAttribute("tipoUsuario");
-                        
+                        String tipoUsuario = (String) sessao.getAttribute("tipoUsuario");
+
                         // Verifica o tipo de usuário e exibe o nome correspondente
-                        if ("administrador".equals(tipoUsuario)){
+                        if ("administrador".equals(tipoUsuario)) {
                 %>  
                     <a class="nav-link" href="/aplicacaoMVC/admin/dashboard">Dashboard</a>
                     <a class="nav-link" href="/aplicacaoMVC/admin/AdministradorController?acao=Listar">Administrador</a>
@@ -27,23 +26,29 @@
                     <a class="nav-link" href="/aplicacaoMVC/admin/TurmaController?acao=Listar">Turma</a>
                     <a class="nav-link" href="/aplicacaoMVC/admin/logOut">Logout</a>
                 <%      
-                    } else if ("aluno".equals(tipoUsuario)) {
+                        } else if ("aluno".equals(tipoUsuario)) {
                 %>
                     <a class="nav-link" href="/aplicacaoMVC/aluno/TurmaController?acao=Listar">Disciplinas/Turmas</a>
                     <a class="nav-link" href="/aplicacaoMVC/aluno/AlunoController?acao=Listar">Historico</a>
                     <a class="nav-link" href="/aplicacaoMVC/aluno/logOut">Logout</a>
                 <%
-                        } else { // Se não houver administrador logado
+                        } else if ("professor".equals(tipoUsuario)) { 
+                %>
+                    <a class="nav-link" href="/aplicacaoMVC/professor/NotasProfessorController?acao=Listar">Lançar Notas</a>
+                    <a class="nav-link" href="/aplicacaoMVC/professor/AlunosProfessorController?acao=Listar">Alunos</a>
+                    <a class="nav-link" href="/aplicacaoMVC/professor/logOut">Logout</a>
+                <% 
+                        } else { 
                 %>
                     <a class="nav-link" href="/aplicacaoMVC/AutenticaController?acao=Login">Login</a>
                 <%
-                        }
-                   } else { // Caso a sessão não exista
+                    } 
+                } else { // Caso a sessão não exista
                 %>
-                <a class="nav-link" href="/aplicacaoMVC/AutenticaController?acao=Login">Login</a>
-            <%
-                }
-            %>
+                    <a class="nav-link" href="/aplicacaoMVC/AutenticaController?acao=Login">Login</a>
+                <% 
+                    }
+                %>
             </div>
         </div>
     </div>
